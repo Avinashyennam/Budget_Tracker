@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://127.0.0.1/Budget_Tracker")
+require('dotenv').config();
+const mongoUri = process.env.MONGODB_URI;
+console.log(mongoUri);
+mongoose.connect(mongoUri)
 .then(()=>{
     console.log("Database connected");
 })

@@ -45,6 +45,7 @@ app.post("/debit", async (req, res) => {
     return res.send("Amount debited");
 })
 app.get("/getData", async (req, res) => {
+    console.log("In getData");
     const data = await collection.find();
     data.forEach((item) => {
         item.date = item.date.toLocaleDateString();
