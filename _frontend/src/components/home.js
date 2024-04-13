@@ -8,8 +8,6 @@ function App() {
   const [data, setData] = useState([]);
   // const [loading, setLoading] = useState(false);
   useEffect(()=>{
-    // setLoading(true);
-    `${window.location.origin}`
     fetch(`${window.location.origin}/getData`)
     .then((res)=>{
       return res.json();
