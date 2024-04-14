@@ -22,6 +22,10 @@ const dataSchema = new mongoose.Schema({
     date:{
         type:Date,
         required:true,
+    },
+    type:{
+        type:String,
+        required: true
     }
 })
 

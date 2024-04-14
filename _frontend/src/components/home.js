@@ -6,6 +6,7 @@ import {useState, useEffect} from 'react';
 
 function App() {
   const [data, setData] = useState([]);
+  const [total, setTotal] = useState(0);
   // const [loading, setLoading] = useState(false);
   useEffect(()=>{
     fetch(`${window.location.origin}/getData`)
@@ -18,8 +19,28 @@ function App() {
       // setLoading(false);
     })
   },[]);
-  console.log(data);
+  // useEffect(()=>{
+  //   fetch(`${window.location.origin}/getTotal`)
+  //   .then((res)=>{
+  //     return res.json;
+  //   })
+  //   .then((data)=>{
+  //     setTotal(data);
+  //   })
+  // })
+  // console.log(data);
 
+//   var sum = 0;
+//   data.forEach(item => {
+//     if(item.type === "credit")
+//     {
+//       sum = sum + item.amount;
+//     }
+//     else{
+//       sum = sum - item.amount;
+//     }
+//   });
+//  console.log("total amount is ", sum);
   const limitedData = data.slice(0,15);
 
   return (
@@ -47,7 +68,7 @@ function App() {
             <p className='text-2xl font-normal'>Current balance: </p>
             <div className='flex gap-1'>
               <FontAwesomeIcon icon={faIndianRupeeSign} style={{ width: "20px", height: "40px", color: "black" }} />
-              <h2 className='text-3xl font-bold text-black'>5000.00</h2>
+              <h2 className='text-3xl font-bold text-black'>40</h2>
             </div>
           </div>
 
