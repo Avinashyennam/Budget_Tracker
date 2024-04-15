@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 require('dotenv').config();
-const mongoUri = process.env.MONGODB_URI;
-console.log(mongoUri);
+const mongoUri = process.env.DATABASE;
 mongoose.connect(mongoUri)
 .then(()=>{
     console.log("Database connected");

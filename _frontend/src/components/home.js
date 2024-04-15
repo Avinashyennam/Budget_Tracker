@@ -2,46 +2,34 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupeeSign, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
-  // const [loading, setLoading] = useState(false);
-  useEffect(()=>{
+  useEffect(() => {
     fetch(`${window.location.origin}/getData`)
-    .then((res)=>{
-      return res.json();
-    })
-    .then((data)=>{
-      // console.log(data);
-      setData(data);
-      // setLoading(false);
-    })
-  },[]);
-  // useEffect(()=>{
-  //   fetch(`${window.location.origin}/getTotal`)
-  //   .then((res)=>{
-  //     return res.json;
-  //   })
-  //   .then((data)=>{
-  //     setTotal(data);
-  //   })
-  // })
-  // console.log(data);
-
-//   var sum = 0;
-//   data.forEach(item => {
-//     if(item.type === "credit")
-//     {
-//       sum = sum + item.amount;
-//     }
-//     else{
-//       sum = sum - item.amount;
-//     }
-//   });
-//  console.log("total amount is ", sum);
-  const limitedData = data.slice(0,15);
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setData(data);
+        // const newTotal = data.reduce((acc, transaction) => acc + transaction.amount, 0);
+        var newTotal = 0;
+        data.forEach(item => {
+          if (item.type === "credit") {
+            newTotal = newTotal + item.amount;
+          }
+          else {
+            newTotal = newTotal - item.amount;
+          }
+        });
+        setTotal(newTotal);
+        // setTotal((prevTotal) => ({ ...prevTotal, value: newTotal }));
+        console.log(newTotal);
+      })
+  }, []);
+  const limitedData = data.slice(0, 15);
 
   return (
     <div className='background flex flex-col gap-6'>
@@ -68,7 +56,7 @@ function App() {
             <p className='text-2xl font-normal'>Current balance: </p>
             <div className='flex gap-1'>
               <FontAwesomeIcon icon={faIndianRupeeSign} style={{ width: "20px", height: "40px", color: "black" }} />
-              <h2 className='text-3xl font-bold text-black'>40</h2>
+              <h2 className='text-3xl font-bold text-black'>{total}</h2>
             </div>
           </div>
 
@@ -96,15 +84,15 @@ function App() {
           <div>
             <ul className='flex flex-col gap-4'>
 
-              {limitedData.map((item)=>(
+              {limitedData.map((item) => (
                 <li id={item.id} className='flex justify-between px-3'>
                   <span>
                     <h4 className='text-2xl font-semibold'>{item.description}</h4>
-                    <p className='text-xl'>{item.date}</p>
+                    <p className='text-xl font-medium'>{`${new Date(item.date).getDate()}-${new Date(item.date).getMonth() + 1}-${new Date(item.date).getFullYear()}`}</p>
                   </span>
                   <span className=' flex items-center gap-3'>
                     <FontAwesomeIcon icon={faIndianRupeeSign} style={{ width: 17, height: 30 }} />
-                    <h4 className='text-3xl font-semibold text-red-600'>{item.amount}</h4>
+                    <h4 className={`text-3xl font-semibold ${item.type === "credit" ? 'text-[#2fba31]' : 'text-red-600'}`}>{item.amount}</h4>
                   </span>
                 </li>
               ))}

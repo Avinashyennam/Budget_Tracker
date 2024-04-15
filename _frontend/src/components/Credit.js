@@ -146,7 +146,7 @@ export default function Credit() {
 
       if (response.ok) { // Check for successful response (status code 200)
         console.log("Transaction submitted successfully:", response);
-        setTxn({ amount: '', desc: '', date: ''}); // Clear form on success
+        setTxn({ amount: '', desc: '', date: '' }); // Clear form on success
       } else {
         console.error("Error submitting transaction:", response);
         // Handle specific errors based on response status code (optional)
@@ -189,8 +189,12 @@ export default function Credit() {
           <input type="text" placeholder="Add Description" name="desc" value={txn.desc} className="border border-black px-4 text-xl rounded-lg w-2/5 sm:w-4/5 h-12" onChange={handleInput} />
           <input type="date" name="date" value={txn.date} onChange={handleInput} />
           <button className="bg-[#2fba31] text-white text-2xl rounded-lg w-1/5 sm:w-2/5 h-12">Add</button>
+          {/* <Link to="/" className="w-1/5" >
+            <button className="bg-[#2fba31] text-white text-2xl rounded-lg w-1/5 sm:w-2/5 h-12">Add</button>
+          </Link> */}
         </motion.form>
       </div>
-      </div>
-    
-)}
+    </div>
+
+  )
+}
