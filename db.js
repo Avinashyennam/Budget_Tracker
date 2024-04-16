@@ -3,9 +3,7 @@ require('dotenv').config();
 const mongoUri = process.env.DATABASE;
 mongoose.connect(mongoUri,{
     useNewUrlParser: true,
-    useCreateIndex: true,
     useUnifiedTopology: true,
-    useFindAndModify: false
 })
 .then(()=>{
     console.log("Database connected");
