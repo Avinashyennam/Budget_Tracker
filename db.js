@@ -10,8 +10,8 @@ mongoose.connect(mongoUri,{
 .then(()=>{
     console.log("Database connected");
 })
-.catch(()=>{
-    console.log("Failed to connect to Database");
+.catch((e)=>{
+    console.log("error is ",e);
 })
 
 const dataSchema = new mongoose.Schema({
