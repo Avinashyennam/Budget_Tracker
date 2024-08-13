@@ -1,12 +1,15 @@
 const mongoose = require("mongoose");
 require('dotenv').config();
 const mongoUri = process.env.DATABASE;
-mongoose.connect(mongoUri)
+mongoose.connect(mongoUri,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
 .then(()=>{
     console.log("Database connected");
 })
-.catch(()=>{
-    console.log("Failed to connect to Database");
+.catch((e)=>{
+    console.log("error is ",e);
 })
 
 const dataSchema = new mongoose.Schema({
