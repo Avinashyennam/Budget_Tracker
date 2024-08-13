@@ -42,7 +42,7 @@ app.post("/debit", async (req, res) => {
     return res.send("Amount debited");
 })
 app.get("/getData", async (req, res) => {
-    const data = await collection.find();
+    const data = await collection.find().sort({ date: -1 });
     res.type('application/json');
     res.json(data);
 });
