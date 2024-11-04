@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion, useInView, useAnimation } from 'framer-motion';
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,6 +10,7 @@ export default function Debit() {
         desc: '',
         date: '',
     });
+    const navigate = useNavigate();
 
     const handleInput = (e) => {
         let name = e.target.name;
@@ -40,6 +41,7 @@ export default function Debit() {
                     desc: '',
                     date: '',
                 });
+                navigate('/');
             }
         }
         catch (e) {

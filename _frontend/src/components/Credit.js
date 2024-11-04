@@ -106,7 +106,7 @@
 
 import React, { useState } from "react";
 // import { ReactDOM } from "react"; // Likely not needed for this component
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -128,6 +128,7 @@ export default function Credit() {
       [name]: value,
     });
   };
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -147,6 +148,7 @@ export default function Credit() {
       if (response.ok) { // Check for successful response (status code 200)
         console.log("Transaction submitted successfully:", response);
         setTxn({ amount: '', desc: '', date: '' }); // Clear form on success
+        navigate('/');
       } else {
         console.error("Error submitting transaction:", response);
         // Handle specific errors based on response status code (optional)
